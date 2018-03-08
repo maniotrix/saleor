@@ -168,7 +168,6 @@ INSTALLED_APPS = [
     'saleor.search',
     'saleor.site',
     'saleor.data_feeds',
-    'saleor.page',
 
     # External apps
     'versatileimagefield',
@@ -231,8 +230,8 @@ AUTH_USER_MODEL = 'account.User'
 
 LOGIN_URL = '/account/login/'
 
-DEFAULT_COUNTRY = 'US'
-DEFAULT_CURRENCY = 'USD'
+DEFAULT_COUNTRY = 'IND'
+DEFAULT_CURRENCY = 'INR'
 AVAILABLE_CURRENCIES = [DEFAULT_CURRENCY]
 
 OPENEXCHANGERATES_API_KEY = os.environ.get('OPENEXCHANGERATES_API_KEY')
@@ -281,7 +280,7 @@ bootstrap4 = {
 
 TEST_RUNNER = ''
 
-ALLOWED_HOSTS = get_list(os.environ.get('ALLOWED_HOSTS', 'localhost'))
+ALLOWED_HOSTS = ['*'] #get_list(os.environ.get('ALLOWED_HOSTS', '127.0.0.1'))
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
@@ -396,26 +395,3 @@ IMPERSONATE = {
     'CUSTOM_USER_QUERYSET': 'saleor.account.impersonate.get_impersonatable_users',  # noqa
     'USE_HTTP_REFERER': True,
     'CUSTOM_ALLOW': 'saleor.account.impersonate.can_impersonate'}
-
-
-# Rich-text editor
-ALLOWED_TAGS = [
-    'a',
-    'b',
-    'blockquote',
-    'br',
-    'em',
-    'h2',
-    'h3',
-    'i',
-    'img',
-    'li',
-    'ol',
-    'p',
-    'strong',
-    'ul']
-ALLOWED_ATTRIBUTES = {
-    '*': ['align', 'style'],
-    'a': ['href', 'title'],
-    'img': ['src']}
-ALLOWED_STYLES = ['text-align']
