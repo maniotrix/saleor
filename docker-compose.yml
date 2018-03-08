@@ -23,13 +23,6 @@ services:
       - redis
     depends_on:
       - redis
-  search:
-    image: elasticsearch:5.4.3
-    mem_limit: 512m
-    environment:
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-    ports:
-      - '127.0.0.1:9200:9200'
   web:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
@@ -37,7 +30,6 @@ services:
     depends_on:
       - db
       - redis
-      - search
     ports:
       - '8000:8000'
     volumes:
