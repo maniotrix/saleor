@@ -15,14 +15,17 @@ from .dashboard.urls import urlpatterns as dashboard_urls
 from .data_feeds.urls import urlpatterns as feed_urls
 from .graphql.api import schema
 from .order.urls import urlpatterns as order_urls
-from .page.urls import urlpatterns as page_urls
 from .product.urls import urlpatterns as product_urls
 from .search.urls import urlpatterns as search_urls
+
+from django.contrib import admin
+admin.autodiscover()
 
 handler404 = 'saleor.core.views.handle_404'
 
 urlpatterns = [
     url(r'^', include(core_urls)),
+    url(r'^admin/', admin.site.urls),
     url(r'^cart/', include((cart_urls, 'cart'), namespace='cart')),
     url(r'^checkout/',
         include((checkout_urls, 'checkout'), namespace='checkout')),
@@ -32,7 +35,6 @@ urlpatterns = [
         schema=schema, graphiql=settings.DEBUG), name='api'),
     url(r'^jsi18n/$', JavaScriptCatalog.as_view(), name='javascript-catalog'),
     url(r'^order/', include((order_urls, 'order'), namespace='order')),
-    url(r'^page/', include((page_urls, 'page'), namespace='page')),
     url(r'^products/',
         include((product_urls, 'product'), namespace='product')),
     url(r'^account/',

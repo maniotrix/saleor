@@ -13,6 +13,7 @@ from django_prices.models import MoneyField, TaxedMoneyField
 from payments import PaymentStatus, PurchasedItem
 from payments.models import BasePayment
 from prices import Money, TaxedMoney
+from versatileimagefield.fields import PPOIField, VersatileImageField
 
 from . import GroupStatus, OrderStatus
 from ..account.models import Address
@@ -246,6 +247,9 @@ class OrderLine(models.Model):
     product_sku = models.CharField(max_length=32)
     is_shipping_required = models.BooleanField()
     stock_location = models.CharField(max_length=100, default='')
+    quality_video_url_id = models.CharField(max_length=100, default='')
+    download_url = models.TextField(null=True)
+    inspect_update_time = models.DateTimeField(default=now)
     stock = models.ForeignKey(
         'product.Stock', on_delete=models.SET_NULL, null=True)
     quantity = models.IntegerField(
@@ -258,7 +262,7 @@ class OrderLine(models.Model):
         net_field='unit_price_net', gross_field='unit_price_gross')
 
     def __str__(self):
-        return self.product_name
+        return self.product_name + "_" + str(self.delivery_group.order.id)
 
     def get_total(self):
         return self.unit_price * self.quantity
@@ -296,19 +300,18 @@ class Payment(BasePayment):
             PurchasedItem(
                 name=line.product_name, sku=line.product_sku,
                 quantity=line.quantity,
-                price=line.unit_price_gross.quantize(Decimal('0.01')).amount,
-                currency=line.unit_price.currency)
+                price=line.unit_price_gross.quantize(Decimal('0.01')),
+                currency=settings.DEFAULT_CURRENCY)
             for line in self.order.get_lines()]
 
         voucher = self.order.voucher
         if voucher is not None:
-            lines.append(
-                PurchasedItem(
-                    name=self.order.discount_name,
-                    sku='DISCOUNT',
-                    quantity=1,
-                    price=-self.order.discount_amount.amount,
-                    currency=self.order.discount_amount.currency))
+            lines.append(PurchasedItem(
+                name=self.order.discount_name,
+                sku='DISCOUNT',
+                quantity=1,
+                price=-self.order.discount_amount.amount,
+                currency=self.currency))
         return lines
 
     def get_total_price(self):
@@ -334,6 +337,40 @@ class OrderHistoryEntry(models.Model):
     class Meta:
         ordering = ('date', )
 
+#OrderLine
+#OrderLineChild
+#OrderLineChildImage
+
+
+class OrderLineChild(models.Model):
+    name = models.CharField(max_length=100, blank=True)
+    date = models.DateTimeField(db_index=True, auto_now_add=True)
+    line = models.ForeignKey(
+        OrderLine, related_name='childs', on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ('date', )
+
+    def __str__(self):
+        return self.name
+
+    def get_first_image(self):
+        first_image = self.images.first()
+        return first_image.image if first_image else None
+
+class OrderLineChildImage(models.Model):
+    name = models.CharField(max_length=100, blank=True)
+    date = models.DateTimeField(db_index=True, auto_now_add=True)
+    child = models.ForeignKey(
+        OrderLineChild, related_name='images', on_delete=models.CASCADE)
+    image = VersatileImageField(
+        upload_to='orders', blank=False, default = '/home/maniotrix/ecom/saleor/media/products/1_6wdfLGV.jpg')
+
+    class Meta:
+        ordering = ('date', )
+
+    def __str__(self):
+        return self.name
 
 class OrderNote(models.Model):
     user = models.ForeignKey(
