@@ -56,6 +56,9 @@
           Order {{ order }}:
         {% endblocktrans %}
       </h2>
+      <div class="alert alert-success" style="background-color: #fff;">
+    		Order details have been also mailed to you. If you have not received the E-Mail, please check your spam or bulk email folder. 
+  		</div>
         {% if order.paytm_paid %}
           <h5>Payment :  <span class="badge badge-success">Success</span></h5>
         {% else %}

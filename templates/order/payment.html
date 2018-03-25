@@ -38,18 +38,15 @@
   <div class="row checkout">
     <div class="col-lg-10 m-auto">
       <div class="alert alert-info">
-    		<strong>Info!</strong> Currently, we only accept payment at your doorstep in cash or via e-wallets.
+    		<strong>Info!</strong> Currently, we only accept payment at your doorstep (cash or e-wallets).
   		</div>
-  		<div class="alert alert-warning">
+  		<div class="alert alert-warning" style="background-color: #fff;">
     		<strong>Warning!</strong> Please, pay only in the physical presence of contact no - (+91)9565521581.
   		</div>
       {% include 'order/_ordered_items_table.html' %}
       <a href="{{ order.get_absolute_url }}" class="btn primary">
       	{% trans "Order Details" context "Order details link text" %}
       </a><p></p>
-      <div class="alert alert-success">
-    		Order details have been also mailed to you. If you have not received the E-Mail, please check your spam or bulk email folder. 
-  		</div>
     </div>
   </div>
 {% endblock content %}
