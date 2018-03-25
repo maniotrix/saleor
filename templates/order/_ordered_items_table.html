@@ -12,14 +12,14 @@
       {% if order.is_shipping_required %}
         <div class="col-6">
           <h3>
-            {% trans "Shipping address" context "Order details address title" %}
+            {% trans "Shipping address : " context "Order details address title" %}
           </h3>
           {% format_address order.shipping_address %}
         </div>
       {% endif %}
       <div class="col-6">
         <h3>
-          {% trans "Billing address" context "Order details address title" %}
+          {% trans "Billing address : " context "Order details address title" %}
         </h3>
         {% format_address order.billing_address %}
       </div>

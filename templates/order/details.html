@@ -53,20 +53,16 @@
     <div class="col-lg-10 m-auto">
       <h2 class="order-details__header">
         {% blocktrans trimmed with order_status=order.get_status_display context "Order detail text" %}
-          Order {{ order }}: {{ order_status }}
+          Order {{ order }}:
         {% endblocktrans %}
       </h2>
-      {% if not order.is_fully_paid %}
-        {% if order.is_pre_authorized %}
-          <a href="{% url "order:payment" token=order.token %}" class="btn btn-link">
-            {% trans "Payment details" context "Order details link text" %}
-          </a>
+        {% if order.paytm_paid %}
+          <h5>Payment :  <span class="badge badge-success">Success</span></h5>
         {% else %}
           <a href="{% url "order:payment" token=order.token %}" class="btn primary">
             {% trans "Pay for order" context "Order details primary action" %}
           </a>
         {% endif %}
-      {% endif %}
       {% include "order/_ordered_items_table.html" %}
       
         <div>
@@ -178,7 +174,7 @@
           {% endfor %}
         {% endfor %}
      </div>
-
+		<p></p>
       <div class="order-notes">
       {% if notes %}
         <h2 class="order-notes__header">{% trans "Notes" context "Order notes list" %}</h2>

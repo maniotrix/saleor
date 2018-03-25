@@ -73,11 +73,12 @@ class Order(models.Model):
         blank=True, null=True)
     total = TaxedMoneyField(net_field='total_net', gross_field='total_gross')
     voucher = models.ForeignKey(
-        Voucher, null=True, related_name='+', on_delete=models.SET_NULL)
+        Voucher, null=True, blank=True, related_name='+', on_delete=models.SET_NULL)
     discount_amount = MoneyField(
         currency=settings.DEFAULT_CURRENCY, max_digits=12, decimal_places=2,
         blank=True, null=True)
     discount_name = models.CharField(max_length=255, default='', blank=True)
+    paytm_paid = models.BooleanField(default=False)
 
     objects = OrderQuerySet.as_manager()
 
