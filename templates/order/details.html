@@ -109,7 +109,7 @@
                                <div class="tab-content" id="myTabContent">
                                     <div class="tab-pane fade show active" id="video{{ line.pk }}" role="tabpanel" aria-labelledby="Video-tab">
                                         <div class="embed-responsive embed-responsive-16by9">
-                                            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{ line.quality_video_url_id }}?rel=0&showinfo=0" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>
+                                            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{ line.quality_video_url_id }}?rel=0&showinfo=0" frameborder="0" allow="encrypted-media" allowfullscreen>Loading...</iframe>
                                         </div>
                                         <p></p>
                                         <p> <b> Want more control of playback speed and quality?</b></p> 
@@ -214,6 +214,12 @@
           <input type="submit" value="Submit" class="btn primary" />
         </form>
       {% endif %}
+      </div>
+      <div class="alert alert-info" style="background-color: #fff;">
+          Survey : Please complete the survey below to let us understand you  better.
+      </div>
+      <div class="embed-responsive embed-responsive-16by9">
+ 	   	<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfMTpSTOPV5SwF-xM0HEk7sINrXCPsd9XD2vY8fpZ7eY9y7uw/viewform?embedded=true" style>Loading...</iframe>
       </div>
     </div>
   </div>
