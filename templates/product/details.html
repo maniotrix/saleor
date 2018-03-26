@@ -166,12 +166,6 @@
           {% blocktrans context "Product details text" %}This product is currently <strong>unavailable</strong>.{% endblocktrans %}
         </p>
       {% endif %}
-      <div class="product__info__description">
-        <h3>{% trans "Description" context "Product details title" %}</h3>
-        <hr>
-        {{ product.description|safe }}
-      </div>
-      <hr>
       <table>
         {% for attribute, value in product_attributes.items %}
           <tr>
@@ -180,6 +174,13 @@
           </tr>
         {% endfor %}
       </table>
+      <hr>
+      <div class="product__info__description">
+        <h3>{% trans "Description" context "Product details title" %}</h3>
+        <hr>
+        {{ product.description|safe }}
+      </div>
+      <hr>
     </div>
   </div>
 {% endblock content %}
