@@ -57,3 +57,22 @@
     white-space: pre-wrap;
   }
 }
+
+.card-header {
+	.accordion-toggle {
+		&:after {
+			font-family: 'Lato,sans-serif';
+			content: "-";
+			float: right;
+			color: #26a5d4;
+			font-size: larger;
+		}
+	}
+	.accordion-toggle.collapsed {
+		&:after {
+			content: "+";
+			font-size: larger;
+		}
+	}
+}
+

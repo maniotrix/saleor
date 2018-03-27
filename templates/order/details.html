@@ -80,14 +80,14 @@
             
               <div class="card">
                 <div class="card-header" id="headingOne" style="background-color:#ffffff">
-                  <h5 class="mb-0">
-                    <a class="btn btn-link" data-toggle="collapse" data-target="#collapse{{ line.pk }}" aria-expanded="false" aria-controls="collapse{{ line.pk }}">
-                      <span class="order-details__product__description" style="color:#26a5d4"><b>{{ line.product_name }}</b></span>
+                  <h5 class="mb-0" style="font-size: large;">
+                    <a class="accordion-toggle" data-toggle="collapse" href="#collapse{{ line.pk }}" aria-expanded="true" aria-controls="collapse{{ line.pk }}" style="color:#26a5d4">
+                      {{ line.product_name }}
                     </a>
                   </h5>
                 </div>
 
-                <div id="collapse{{ line.pk }}" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordion">
+                <div id="collapse{{ line.pk }}" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                   <div class="card-body">
                     {% if line.quality_video_url_id %}
                       <div class="container-fluid">
