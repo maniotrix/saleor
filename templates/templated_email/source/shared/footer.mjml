@@ -11,7 +11,7 @@
   <mj-column>
     <mj-text align="center">
       {% blocktrans trimmed context "Base e-mail footer" %}
-        Sincerely, {{ site_name }}
+        Sincerely, VerifyFresh
       {% endblocktrans %}
     </mj-text>
   </mj-column>
