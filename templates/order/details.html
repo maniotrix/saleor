@@ -57,15 +57,19 @@
         {% endblocktrans %}
       </h2>
       <div class="alert alert-success" style="background-color: #fff;">
-    		Order details have been also mailed to you. If you have not received the E-Mail, please check your spam or bulk email folder. 
+    		Order details have been also mailed to you. If you have not received the E-Mail, please check your spam or bulk email folder. <br><strong>Note!</strong> If orders are not delivered on the same day, they are automatically cancelled.
   		</div>
+      {% if order.is_past_due %}
+        <h6>Order Status:  <span class="badge badge-danger">Cancelled</span></h6>
+      {% else %}
         {% if order.paytm_paid %}
-          <h5>Payment :  <span class="badge badge-success">Success</span></h5>
+          <h5>Payment Status:  <span class="badge badge-success">Success</span></h5>
         {% else %}
           <a href="{% url "order:payment" token=order.token %}" class="btn primary">
             {% trans "Pay for order" context "Order details primary action" %}
           </a>
         {% endif %}
+      {% endif %}
       {% include "order/_ordered_items_table.html" %}
       
         <div>
@@ -179,8 +183,11 @@
      </div>
 		<p></p>
       <div class="order-notes">
+         <h2 class="order-notes__header">{% trans "Comments:" context "Order notes list" %}</h2>
+         <div class="alert alert-info">
+            Please comment below to review your Order Inspection.
+         </div>
       {% if notes %}
-        <h2 class="order-notes__header">{% trans "Notes" context "Order notes list" %}</h2>
         {% for note in notes %}
           <small>
             {% if note.user %}

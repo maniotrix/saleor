@@ -1,5 +1,6 @@
 from decimal import Decimal
 from uuid import uuid4
+from datetime import date
 
 from django.conf import settings
 from django.core.validators import MaxValueValidator, MinValueValidator
@@ -147,6 +148,12 @@ class Order(models.Model):
     def is_shipping_required(self):
         return any(group.is_shipping_required() for group in self.groups.all())
 
+    @property
+    def is_past_due(self):
+    	  if self.paytm_paid:
+    	  		return False
+    	  return date.today() > self.created.date()
+    
     @property
     def status(self):
         """Order status deduced from shipment groups."""
