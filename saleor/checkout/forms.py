@@ -2,6 +2,7 @@
 from django import forms
 from django.utils.safestring import mark_safe
 from django.utils.translation import pgettext_lazy
+from nocaptcha_recaptcha.fields import NoReCaptchaField
 
 from ..core.utils import format_money
 from ..shipping.models import ShippingMethodCountry
@@ -46,6 +47,7 @@ class BillingAddressesForm(ShippingAddressesForm):
             'Billing addresses form choice', 'Same as shipping'))]
 
     address = CheckoutAddressField(choices=CHOICES, initial=SHIPPING_ADDRESS)
+    captcha = NoReCaptchaField()
 
 
 class BillingWithoutShippingAddressForm(ShippingAddressesForm):
@@ -113,7 +115,7 @@ class AnonymousUserBillingForm(forms.Form):
         required=True, widget=forms.EmailInput(
             attrs={'autocomplete': 'billing email'}),
         label=pgettext_lazy('Billing form field label', 'Email'))
-
+    captcha = NoReCaptchaField()
 
 class NoteForm(forms.Form):
     """Form to add a note to an order."""

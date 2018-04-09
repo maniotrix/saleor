@@ -9,6 +9,9 @@
     {% include "checkout/snippets/addresses_form.html" with addresses_form=addresses_form addresses=additional_addresses address_form=address_form only %}
     <h2>{% trans "Add a note to your order" context "Checkout summary note title" %}</h2>
         {% bootstrap_form note_form show_label=False %}
+    <div class="class="embed-responsive embed-responsive-16by9"">
+        {{ addresses_form.captcha }}
+    </div>
     <p class="text-md-right">
       <button type="submit" class="btn primary">
         {% trans "Order &amp Pay" context "Checkout summary primary action" %}

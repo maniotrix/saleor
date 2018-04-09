@@ -181,6 +181,7 @@ INSTALLED_APPS = [
     'django_prices_openexchangerates',
     'graphene_django',
     'mptt',
+    'nocaptcha_recaptcha',
     'payments',
     'webpack_loader',
     'social_django',
@@ -391,6 +392,11 @@ CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_RESULT_BACKEND = 'django-db'
+
+#Recaptcha Settings
+NORECAPTCHA_SITE_KEY = '6LfDSlEUAAAAAB-DAz2zsIrLW2kM6JKxJONMmKOD'
+NORECAPTCHA_SECRET_KEY = '6LfDSlEUAAAAANatwGiwf4HmsZ580FCvdKyh3ybv'
+NORECAPTCHA_WIDGET_TEMPLATE = 'captcha.html'
 
 # Impersonate module settings
 IMPERSONATE = {

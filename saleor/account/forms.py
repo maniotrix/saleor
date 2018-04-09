@@ -3,6 +3,7 @@ from django.conf import settings
 from django.contrib.auth import forms as django_forms, update_session_auth_hash
 from django.utils.translation import pgettext, pgettext_lazy
 from phonenumbers.phonenumberutil import country_code_for_region
+from nocaptcha_recaptcha.fields import NoReCaptchaField
 
 from . import emails
 from ..account.models import User
@@ -59,6 +60,7 @@ class LoginForm(django_forms.AuthenticationForm):
     username = forms.EmailField(
         label=pgettext('Form field', 'Email'), max_length=75)
 
+    captcha = NoReCaptchaField()
     def __init__(self, request=None, *args, **kwargs):
         super().__init__(request=request, *args, **kwargs)
         if request:
@@ -75,7 +77,7 @@ class SignupForm(forms.ModelForm):
             'unique': pgettext_lazy(
                 'Registration error',
                 'This email has already been registered.')})
-
+    captcha = NoReCaptchaField()
     class Meta:
         model = User
         fields = ('email',)
