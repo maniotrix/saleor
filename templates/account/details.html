@@ -59,6 +59,9 @@
                 <div class="col-md-2 col-4 text-right">
                   <small>{% trans "Summary" context "Recent orders column title" %}</small>
                 </div>
+                <div class="col-md-4 d-none d-md-block">
+                  <small>{% trans "Status" context "Recent orders column title" %}</small>
+                </div>
                 <div class="col-md-1 col-5"></div>
               </div>
             </div>
@@ -73,6 +76,19 @@
                   </div>
                   <div class="col-md-2 col-4">
                     <span class="float-right">{{ order.total.gross|amount:'html' }}</span>
+                  </div>
+                  <div class="col-md-4 d-none d-md-block">
+		            {% if order.is_past_due %}
+				    <span class="badge badge-danger">Cancelled</span>
+			        {% else %}
+				        {% if order.paytm_paid %}
+				            <span class="badge badge-success">Success</span>
+				        {% else %}
+				            <a href="{% url "order:payment" token=order.token %}" class="badge badge-info">
+				            {% trans "Pay for order" context "Order details primary action" %}
+				            </a>
+				        {% endif %}
+			        {% endif %}
                   </div>
                   <div class="col-md-1 col-5">
                     <a href="{{ order.get_absolute_url }}" class="float-right link--styled">
