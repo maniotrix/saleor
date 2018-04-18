@@ -152,7 +152,7 @@ class Order(models.Model):
     def is_past_due(self):
     	  if self.paytm_paid:
     	  		return False
-    	  return date.today() > self.created.date()
+    	  return now().date() > self.created.date()
     
     @property
     def status(self):
