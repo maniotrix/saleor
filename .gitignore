@@ -16,6 +16,7 @@
 *.log
 *.pot
 *.pyc
+*.env
 local_settings.py
 __pycache__/
 build/
