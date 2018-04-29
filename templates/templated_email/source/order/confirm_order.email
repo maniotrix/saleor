@@ -9,8 +9,9 @@
 {% blocktrans context "Order confirmation e-mail text" %}
 Hi!
 
-Thank you for your order. Below is the list of ordered products. To see your payment details please visit:
+Thank you for your order. Below is the list of ordered products. To see your inspection and payment details please visit:
 {{ url }}{% endblocktrans %}
+ Your Order Inspection Token is  {{ order.pk }}
 {% for group in order.groups.all %}{% for line in group.lines.all %}
 {{ line.quantity }} x {{ line.product_name }}, {{ line.get_total.gross|amount }}
 {% endfor %}{% endfor %}
