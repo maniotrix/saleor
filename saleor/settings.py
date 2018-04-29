@@ -50,6 +50,8 @@ USE_TZ = True
 
 FORM_RENDERER = 'django.forms.renderers.TemplatesSetting'
 
+ADMIN_EMAIL = "prince.mst13@gmail.com"
+
 EMAIL_URL = os.environ.get('EMAIL_URL')
 SENDGRID_USERNAME = os.environ.get('SENDGRID_USERNAME')
 SENDGRID_PASSWORD = os.environ.get('SENDGRID_PASSWORD')

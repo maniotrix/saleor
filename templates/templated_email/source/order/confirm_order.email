@@ -2,7 +2,7 @@
 {% load prices_i18n %}
 
 {% block subject %}
-  {% trans "Order details" context "Order confirmation e-mail subject" %}
+  {% trans "Order details for Order #" context "Order confirmation e-mail subject" %}{{ order.pk }}
 {% endblock %}
 
 {% block plain %}
@@ -11,7 +11,6 @@ Hi!
 
 Thank you for your order. Below is the list of ordered products. To see your inspection and payment details please visit:
 {{ url }}{% endblocktrans %}
- Your Order Inspection Token is  {{ order.pk }}
 {% for group in order.groups.all %}{% for line in group.lines.all %}
 {{ line.quantity }} x {{ line.product_name }}, {{ line.get_total.gross|amount }}
 {% endfor %}{% endfor %}

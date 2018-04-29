@@ -35,6 +35,12 @@ def collect_data_for_email(order_pk, template):
         reverse('order:details', kwargs={'token': order.token}))
     return {'email': email, 'url': url, 'template': template}
 
+def collect_data_for_email_admin(order_pk, template):
+    order = Order.objects.get(pk=order_pk)
+    email = settings.ADMIN_EMAIL
+    url = build_absolute_uri(
+        reverse('order:details', kwargs={'token': order.token}))
+    return {'email': email, 'url': url, 'template': template}
 
 @shared_task
 def send_order_confirmation(order_pk):
@@ -43,6 +49,13 @@ def send_order_confirmation(order_pk):
     email_data.update({'context': {'order': order}})
     _send_confirmation(**email_data)
 
+
+@shared_task
+def send_order_confirmation_admin(order_pk):
+    order = Order.objects.get(pk=order_pk)
+    email_data = collect_data_for_email_admin(order_pk, CONFIRM_ORDER_TEMPLATE)
+    email_data.update({'context': {'order': order}})
+    _send_confirmation(**email_data)
 
 @shared_task
 def send_payment_confirmation(order_pk):
