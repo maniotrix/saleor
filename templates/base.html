@@ -3,6 +3,8 @@
 {% load staticfiles %}
 {% load render_bundle from webpack_loader %}
 {% load placeholder %}
+{% load pwa %}
+
 
 <html lang="{{ LANGUAGE_CODE }}" class="no-js" data-shipping-options-url="{% url 'cart:shipping-options' %}" data-cart-summary-url="{% url 'cart:cart-summary' %}">
 <head>
@@ -24,6 +26,8 @@
   {% render_bundle 'storefront' 'css' attrs='async' %}
 
   {% block stylesheet %}{% endblock stylesheet %}
+  
+  {% progressive_web_app_meta %}
 
   {% block meta_tags %}
     <meta property="og:title" content="{{ site.name }}">

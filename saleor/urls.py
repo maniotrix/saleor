@@ -27,6 +27,7 @@ handler404 = 'saleor.core.views.handle_404'
 urlpatterns = [
     url(r'^', include(core_urls)),
     url(r'^admin/', admin.site.urls),
+    url('', include('pwa.urls')),
     url(r'^cart/', include((cart_urls, 'cart'), namespace='cart')),
     url(r'^checkout/',
         include((checkout_urls, 'checkout'), namespace='checkout')),

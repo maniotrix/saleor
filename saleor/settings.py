@@ -184,6 +184,7 @@ INSTALLED_APPS = [
     'graphene_django',
     'mptt',
     'nocaptcha_recaptcha',
+    'pwa',
     'payments',
     'webpack_loader',
     'social_django',
@@ -399,6 +400,20 @@ CELERY_RESULT_BACKEND = 'django-db'
 NORECAPTCHA_SITE_KEY = '6LfDSlEUAAAAAB-DAz2zsIrLW2kM6JKxJONMmKOD'
 NORECAPTCHA_SECRET_KEY = '6LfDSlEUAAAAANatwGiwf4HmsZ580FCvdKyh3ybv'
 NORECAPTCHA_WIDGET_TEMPLATE = 'captcha.html'
+
+
+#PWA Settings
+PWA_APP_NAME = 'Verifyfresh'
+PWA_APP_DESCRIPTION = "Order Groceries Online"
+PWA_APP_THEME_COLOR = '#0A0302'
+PWA_APP_DISPLAY = 'standalone'
+PWA_APP_START_URL = '/'
+PWA_APP_ICONS = [
+    {
+        'src': '/static/favicons/android-chrome-192x192.png',
+        'sizes': '192x192'
+    }
+]
 
 # Impersonate module settings
 IMPERSONATE = {
