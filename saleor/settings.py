@@ -415,6 +415,8 @@ PWA_APP_ICONS = [
     }
 ]
 
+PWA_SERVICE_WORKER_PATH = os.path.join(STATIC_ROOT, 'js', 'serviceworker.js')
+
 # Impersonate module settings
 IMPERSONATE = {
     'URI_EXCLUSIONS': [r'^dashboard/'],
